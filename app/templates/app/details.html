@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        input[type="text"], input[type="email"], input[type="number"], input[type="file"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        button, .file-input-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            position: relative; /* Allows absolute positioning inside */
+            overflow: hidden; /* Ensures the file input doesn't overflow */
+        }
+
+            button:hover, .file-input-button:hover {
+                background-color: #45a049;
+            }
+
+        input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 100px;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form method="post" action="{% url 'submit_form' %}">
+            {% csrf_token %}
+
+            Resume Upload and LinkedIn Apply Section
+            <div class="apply-options">
+                <p>Make completing your job application easier by uploading your resume or CV.</p>
+                <p>Upload either DOC, DOCX, PDF, or TXT file types (5MB max).</p>
+                <label class="file-input-button">
+                    Upload Resume
+                    <input type="file" name="resume">
+                </label>
+                <button class="linkedin-apply">Apply With LinkedIn</button>
+            </div>
+            <div><a href="#">Career</a>
+            </div>
+            
+            <h2>Basic Information</h2>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" >
+
+
+            <h2>Qualifications:</h2>
+            <label for="recentedu">Highest Education level:</label>
+            <input type="text" id="recentedu" name="recentedu" >
+
+            <h2>Experience:</h2>
+            <label for="relatedexp">How many years realted experiecne do you have: </label>
+            <input type="number" id="relatedexp" name="relatedexp" >
+
+            <label for="companies">How many companeis you have worked before:</label>
+            <input type="number" id="companies" name="companies" >
+
+            
+                <h2>Select your license </h2>
+                <select class="form-control" id="licenseType" name="licenseType">
+                    <option value="AM">Mopeds and light quad bikes (AM)</option>
+                    <option value="A1">Motorcycles up to 125cc (A1)</option>
+                    <option value="A2">Motorcycles up to 35kW (A2)</option>
+                    <option value="A">Motorcycles with or without a sidecar, unlimited cc (A)</option>
+                    <option value="B1">Motor vehicles up to 550kg (B1)</option>
+                    <option value="B">Cars, vans up to 3,500kg, and up to 8 passenger seats (B)</option>
+                    <option value="BE">Large vehicles with trailers (BE)</option>
+                    <option value="C1">Medium-sized vehicles 3,500 to 7,500kg (C1)</option>
+                    <option value="C1E">Medium-sized vehicles with trailers (C1E)</option>
+                    <option value="C">Large vehicles over 3,500kg (C)</option>
+                    <option value="CE">Large vehicles with trailers (CE)</option>
+                    <option value="D1">Minibuses (D1)</option>
+                    <option value="D1E">Minibuses with trailers (D1E)</option>
+                    <option value="D">Buses with more than 8 passenger seats (D)</option>
+                    <option value="DE">Buses with trailers (DE)</option>
+                </select>
+            
+            <h2>When did you pass your driving test:</h2>
+            <input type="date" id="passdate" name="passdate" >
+
+            <h2>When your driving license expire:</h2>
+
+            <input type="date" id="expdate" name="expdate" >
+
+            <label for="cpccard">Do you have a valid cpc card </label>
+            <select class="cpc" id="cpccard" name="cpccard">
+                <option value="yes">Yes I have </option>
+                <option value="No">No I dont have</option>
+            </select>
+
+            <h2>How many CPC course you have completed  </h2>
+            <select class="form-control" id="totalcpc" name="totalcpc">
+                <option value="Zero">0 Course</option>
+                <option value="One">1 Course</option>
+                <option value="Two">2 Course</option>
+                <option value="Three">3 Course</option>
+                <option value="Four">4 Course</option>
+            </select>
+
+            <h2>Youd Address:</h2>
+            <label for="address">First line of address:</label>
+            <input type="text" id="address" name="address" >
+
+            <h2>City</h2>
+            <label for="city">Current City:</label>
+            <input type="text" id="city" name="city" >
+
+            <label for="distance">Are you living in commutable distance withing 15 miles:</label>
+            <input type="number" id="distance" name="distance" >
+
+            <div class="button-container">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+  </div>
+
+    <script>
+        document.getElementById('jobApplicationForm').onsubmit = function (event) {
+            event.preventDefault(); // Prevent the default form submission
+            alert('Form submitted!'); // Placeholder action
+            // Normally, here you would handle form data, perhaps via AJAX or direct form submission
+        };
+    </script>
+</body>
+</html>

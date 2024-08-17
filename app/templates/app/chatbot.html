@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Chatbot Interface</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            min-height: 100vh;
+        }
+
+        .chat-container {
+            width: 350px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #5b86e5;
+            color: #ffffff;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-messages {
+            padding: 10px;
+            overflow-y: auto;
+            flex: 1;
+            background: #fafafa;
+        }
+
+        .chat-message {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        .chat-message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            padding: 8px 12px;
+            border-radius: 16px;
+            max-width: 80%;
+            font-size: 14px;
+        }
+
+        .chat-message.bot .message-content {
+            background: #d1eaff;
+        }
+
+        .chat-message.user .message-content {
+            background: #a2cdf4;
+            color: #ffffff;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background: #e4e4e4;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #5b86e5;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-input button {
+            background: #5b86e5;
+            border: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            color: #ffffff;
+        }
+
+        .chat-input button:hover {
+            background: #4977c1;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chat with Buckbot</h2>
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Chat messages will be appended here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button onclick="processInput()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chatMessages');
+        let step = 0;
+
+        function appendMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `chat-message ${sender}`;
+            messageElement.innerHTML = `<div class="message-content">${message}</div>`;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function processInput() {
+            const userInput = document.getElementById('userInput').value.trim();
+            document.getElementById('userInput').value = '';
+            appendMessage('user', userInput);
+
+            if (step === 0) {
+                if (!userInput.includes(' ')) {
+                    appendMessage('bot', 'Please enter your full name with a space between first and last name.');
+                } else {
+                    step = 1;
+                    appendMessage('bot', 'Do you have the right to work in the UK? (yes/no)');
+                }
+            } else if (step === 1) {
+                if (userInput.toLowerCase() === 'no') {
+                    appendMessage('bot', 'You are not eligible.');
+                    step = 0; // Reset to start
+                } else {
+                    step = 2;
+                    appendMessage('bot', 'How old are you?');
+                }
+            } else if (step === 2) {
+                const age = parseInt(userInput);
+                if (isNaN(age) || age < 18) {
+                    appendMessage('bot', 'You are not eligible.');
+                    step = 0; // Reset to start
+                } else {
+                    step = 3;
+                    appendMessage('bot', 'You are eligible for the job. Do you want to apply now? (yes/no)');
+                }
+            } else if (step === 3) {
+                if (userInput.toLowerCase() === 'yes') {
+                    appendMessage('bot', 'Great! Redirecting you to the application page...');
+                    setTimeout(() => {
+                        window.location.href = "{% url 'details' %}"; // Change to actual application URL
+                    }, 3000);
+                } else {
+                    appendMessage('bot', 'Thank you for your time, feel free to return anytime!');
+                    step = 0; // Reset to start
+                }
+            }
+        }
+
+        window.onload = () => {
+            appendMessage('bot', "Hi! What's your full name?");
+        };
+    </script>
+</body>
+</html>

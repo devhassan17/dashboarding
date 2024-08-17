@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers at Our Company</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .card-panel {
+            transition: box-shadow .25s;
+            cursor: pointer;
+        }
+        .card-panel:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .btn-large {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Join Our Team!</h1>
+        
+        <!-- Driving  Jobs -->
+        <h2>Driving jobs</h2>
+        <div class="card-panel hoverable">
+            <h5>Bus Diver</h5>
+            <p>Join our amazing bus driving companeis.with employee benefits and pension</p>
+            <a class="btn btn-primary btn-large" href="{% url 'chatbot' %}">Apply Now</a>
+
+            <h5>Truck Driver</h5>
+            <p>Join our amazing bus driving companeis.with employee benefits and pension</p>
+            <a class="btn btn-primary btn-large" href="{% url 'chatbot' %}">Apply Now</a>
+
+            <h5>MiniBus Driver</h5>
+            <p>Join our amazing bus driving companeis.with employee benefits and pension.</p>
+            <a class="btn btn-primary btn-large" href="{% url 'chatbot' %}">Apply Now</a>
+        </div>
+        
+        <div class="card-panel hoverable">
+            <h5>DevOps Engineer</h5>
+            <p>Help streamline our operations and development processes to enhance productivity and efficiency.</p>
+            <a class="btn btn-primary btn-large">Apply Now</a>
+        </div>
+        
+        <!-- Marketing Jobs -->
+        <h2>Marketing</h2>
+        <div class="card-panel hoverable">
+            <h5>Content Marketing Manager</h5>
+            <p>Create compelling content that increases brand awareness and engagement across multiple platforms.</p>
+            <a class="btn btn-primary btn-large">Apply Now</a>
+        </div>
+        
+        <!-- Sales Jobs -->
+        <h2>Sales</h2>
+        <div class="card-panel hoverable">
+            <h5>Sales Executive</h5>
+            <p>Drive sales strategies and initiatives to achieve and exceed our sales targets.</p>
+            <a class="btn btn-primary btn-large">Apply Now</a>
+        </div>
+        
+    </div>
+
+    <!-- MDB -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

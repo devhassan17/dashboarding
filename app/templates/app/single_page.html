@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        input[type="text"], input[type="email"], input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        button, .file-input-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            position: relative; /* Allows absolute positioning inside */
+            overflow: hidden; /* Ensures the file input doesn't overflow */
+        }
+
+            button:hover, .file-input-button:hover {
+                background-color: #45a049;
+            }
+
+        input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 100px;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+    
+<body>
+        <div>
+            <h3><ui>Upload a Resume</ui></h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="resume_file" style=" background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;" required>
+                <button type="submit">Parse Resume</button>
+            </form>
+        </div>
+    
+    <div class="form-container">
+        {% if info %}
+        <h2>Edit and Confirm Information:</h2>
+        <form method="post" action="{% url 'upload_resume' %}">
+            {% csrf_token %}
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="{{ info.Name }}" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ info.Email }}" required>
+            </div>
+            <div>
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" value="{{ info.Phone }}" required>
+            </div>
+            <div>
+                <label for="qualifications">Qualifications:</label>
+                <input type="text" id="qualifications" name="qualifications" value="{{ info.Qualifications }}" required>
+            </div>
+            <div>
+                <label for="companies">Total Driving experience</label>
+                <input type="text" id="drivingexp" name="drivingexp" value="{{ info.Total_Experience_Years }}" required>
+            </div>
+            <div>
+                <label for="companies">How many companeis worked with:</label>
+                <input type="text" id="companies" name="companies" value="{{ info.Companies }}" required>
+            </div>
+            <div>
+                <label for="CPC">CPC. If any</label>
+                <input type="number" id="CPC" name="companies" value="{{ info.CPC }}" required>
+            </div>
+
+            <div>
+                <label for="License_Type">License Type</label>
+                <input type="text" id="License_Type" name="License_Type" value="{{ info.License_Type }}" required>
+            </div>
+            <div>
+                <label for="passdate">Driving License passing date</label>
+                <input type="text" id="passdate" name="passdate" value="{{ info.Pass_Date }}" required>
+            </div>
+            <div>
+                <label for="expdate">Driving License Expire Date</label>
+                <input type="text" id="expdate" name="expdate" value="{{ info.Exp_Date }}" required>
+            </div>
+
+            <div>
+                <label for="address">First line of address:</label>
+                <input type="text" id="address" name="address" value="{{ info.Address }}">
+
+            </div>
+
+            <div>
+                <label for="city">Current City:</label>
+                <input type="text" id="city" name="city" value="{{ info.City }}">
+            </div>
+
+            <div>
+                <label for="distance">Are you living in commutable distance withing 15 miles:</label>
+                <input type="number" id="distance" name="distance" value="{{ info.Distance }}">
+            </div>
+
+
+            <div class="button-container">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+
+
+        <button type="submit">Save Information</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+
+</html>

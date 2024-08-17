@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Display</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Training Data</h1>
+    {{ training_html|safe }}
+
+    <h1>Testing Data</h1>
+    {{ testing_html|safe }}
+
+    <h1>New Data</h1>
+    {{ new_data_html|safe }}
+</body>
+</html>

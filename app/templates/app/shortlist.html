@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Data</title>
+    <!-- Include Bootstrap CSS from CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .sidebar {
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .content {
+            margin-left: 220px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h4>Menu</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">All candidates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Shortlisted</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="#">Notify</a>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <h1>Data from MyModel</h1>
+        
+        <h2><a class="nav-link custom-link" href="{% url 'shortlist' %}" style="background-color: #ffffff;">Shortlist</a> </h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Qualification</th>
+                    <th>Years of Experience</th>
+                    <th>Companies Worked</th>
+                    <th>Licesne Type</th>
+                    <th>Licesne Pass date</th>
+                    <th>Licesne Expire date</th>
+                    <th>Have CPC</th>
+                    <th>How many CPC</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th></th>
+                    <!-- Add more headers based on your model's fields -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.phone }}</td>
+                    <td>{{ item.recentedu }}</td>
+                    <td>{{ item.relatedexp }}</td>
+                    <td>{{ item.companies }}</td>
+                    <td>{{ item.liceneType }}</td>
+                    <td>{{ item.passdate }}</td>
+                    <td>{{ item.expdate }}</td>
+                    <td>{{ item.cpccard }}</td>
+                    <td>{{ item.totalcpc }}</td>
+                    <td>{{ item.address }}</td>
+                    <td>{{ item.city }}</td>
+                    <td>{{ item.dsitance }}</td>
+                    <!-- Add more data fields as needed -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies from CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
