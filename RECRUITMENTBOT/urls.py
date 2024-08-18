@@ -24,15 +24,28 @@ from django.urls import include
 from django.contrib.auth.views import LoginView, LogoutView
 from app import  views
 from app.admin import admin_site
+from django.http import HttpResponse
+from django.shortcuts import redirect
 
 
 
+from django.contrib.auth import logout
+
+
+def custom_logout(request):
+    
+    logout(request)
+    
+    return redirect('/admin')
+    
+    
 
 
 
 urlpatterns = [
     
     path('admin/', admin.site.urls),
+    path('logout/', custom_logout),
     path('', views.home, name='home'),
     path('career', views.career, name='career'),
     path('drivers/', views.drivers, name='drivers'),
@@ -40,6 +53,7 @@ urlpatterns = [
     path('details/', views.details, name='details'),
     path('submit_form/', views.submit_form, name='submit_form'),
     path('success/', views.success, name='success'),
+    
    
   
  

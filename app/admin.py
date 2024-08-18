@@ -62,3 +62,4 @@ class MyAdminSite(AdminSite):
 
 # Replace the default admin site with the custom one
 admin_site = MyAdminSite(name='myadmin')
+# testing
